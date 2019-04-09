@@ -5,6 +5,6 @@ public class PointRunner {
         Point p1 = new Point(-2, 5);
         Point p2 = new Point(4, -7);
 
-        System.out.println(String.format("Расстояние между точками p1 и p2 = %.2f", Point.distance(p1, p2)));
+        System.out.println(String.format("Расстояние между точками p1 и p2 = %.2f", p1.distance(p2)));
     }
 }
