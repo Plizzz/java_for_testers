@@ -18,10 +18,6 @@ public class GroupCreationTests {
   public void setUp() {
     wb = new FirefoxDriver();
     wb.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-  }
-
-  @Test
-  public void testGroupCreation() {
     wb.get("http://localhost:99/addressbook/index.php");
     wb.findElement(By.name("user")).click();
     wb.findElement(By.name("user")).clear();
@@ -29,6 +25,10 @@ public class GroupCreationTests {
     wb.findElement(By.name("pass")).clear();
     wb.findElement(By.name("pass")).sendKeys("secret");
     wb.findElement(By.cssSelector("input[type=\"submit\"]")).click();
+  }
+
+  @Test
+  public void testGroupCreation() {
     wb.findElement(By.linkText("groups")).click();
     wb.findElement(By.name("new")).click();
     wb.findElement(By.name("group_name")).click();
@@ -40,11 +40,11 @@ public class GroupCreationTests {
     wb.findElement(By.name("group_footer")).sendKeys("test3");
     wb.findElement(By.name("submit")).click();
     wb.findElement(By.linkText("group page")).click();
-    wb.findElement(By.linkText("Logout")).click();
   }
 
   @AfterMethod(alwaysRun = true)
   public void tearDown() {
+    wb.findElement(By.linkText("Logout")).click();
     wb.quit();
   }
 
