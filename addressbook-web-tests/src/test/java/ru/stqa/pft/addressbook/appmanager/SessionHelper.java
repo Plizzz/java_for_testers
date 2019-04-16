@@ -3,14 +3,18 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class SessionHelper extends HelperBase {
-    public SessionHelper(WebDriver wd) {
+class SessionHelper extends HelperBase {
+    SessionHelper(WebDriver wd) {
         super(wd);
     }
 
-    public void login(String username, String password) {
+    void login(String username, String password) {
         type(By.name("user"), username);
         type(By.name("pass"), password);
         click(By.cssSelector("input[type=\"submit\"]"));
+    }
+
+    void logout() {
+        click(By.linkText("Logout"));
     }
 }
