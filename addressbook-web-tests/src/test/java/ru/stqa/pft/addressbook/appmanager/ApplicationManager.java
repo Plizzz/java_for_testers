@@ -23,14 +23,18 @@ public class ApplicationManager {
     }
 
     public void init() {
-        if (browser.equals(BrowserType.FIREFOX)) {
-            wd = new FirefoxDriver();
-        } else if(browser.equals(BrowserType.CHROME)) {
-            wd = new ChromeDriver();
-        } else if (browser.equals(BrowserType.IE)) {
-            wd = new InternetExplorerDriver();
+        switch (browser) {
+            case BrowserType.FIREFOX:
+                wd = new FirefoxDriver();
+                break;
+            case BrowserType.CHROME:
+                wd = new ChromeDriver();
+                break;
+            case BrowserType.IE:
+                wd = new InternetExplorerDriver();
+                break;
         }
-        wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         wd.get("http://localhost:99/addressbook/index.php");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
