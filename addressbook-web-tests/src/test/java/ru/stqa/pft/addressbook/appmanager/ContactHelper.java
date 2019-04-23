@@ -11,7 +11,7 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void submitContactForm() {
+    private void submitContactForm() {
         click(By.name("submit"));
     }
 
@@ -28,7 +28,7 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public void initContactCreation() {
+    private void initContactCreation() {
         click(By.linkText("add new"));
     }
 
@@ -48,4 +48,13 @@ public class ContactHelper extends HelperBase {
     public void submitContactModification() {
         click(By.name("update"));
     }
+
+    public void createContact(ContactData contact) {
+        initContactCreation();
+        fillContactForm(contact, true);
+        submitContactForm();
+        NavigationHelper navigationHelper = new NavigationHelper(wd);
+        navigationHelper.gotoHomePage();
+    }
+
 }
