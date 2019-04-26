@@ -7,11 +7,8 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 public class TestBase {
-
-    ContactData createContact = new ContactData("Michael", "Webber", "89862551445", "webberM@google.com", "test1");
-    ContactData modifyContact = new ContactData("Michael", "Webber", "89862551445", "webberM@google.com", null);
-
     final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+    ContactData createContact = new ContactData("Michael", "Webber", "89862551445", "webberM@google.com", "test1");
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
