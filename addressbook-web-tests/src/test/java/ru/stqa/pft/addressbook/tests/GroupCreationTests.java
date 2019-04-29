@@ -11,7 +11,7 @@ public class GroupCreationTests extends TestBase {
 
   @Test
   public void testGroupCreation() {
-    GroupData group = new GroupData("test2", null, null);
+    GroupData group = new GroupData("test2");
     app.getNavigationHelper().gotoGroupPage();
     List<GroupData> before = app.getGroupHelper().getGroupList();
     app.getGroupHelper().createGroup(group);

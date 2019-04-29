@@ -28,6 +28,14 @@ public class ContactData {
         this.group = null;
     }
 
+    public ContactData(int id, String firstname, String lastname) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.homenumber = null;
+        this.email = null;
+    }
+
     public String getFirstname() {
         return firstname;
     }

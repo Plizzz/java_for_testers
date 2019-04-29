@@ -22,6 +22,20 @@ public class GroupData {
         this.footer = footer;
     }
 
+    public GroupData(int id, String name) {
+        this.id = id;
+        this.name = name;
+        this.header = null;
+        this.footer = null;
+    }
+
+    public GroupData(String name) {
+        this.id = Integer.MAX_VALUE;
+        this.name = name;
+        this.header = null;
+        this.footer = null;
+    }
+
     public String getName() {
         return name;
     }
