@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
     private ContactHelper contactHelper;
-     private WebDriver wd;
+    private WebDriver wd;
 
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
@@ -18,7 +18,6 @@ public class ApplicationManager {
     private String browser;
 
     public ApplicationManager(String browser) {
-
         this.browser = browser;
     }
 

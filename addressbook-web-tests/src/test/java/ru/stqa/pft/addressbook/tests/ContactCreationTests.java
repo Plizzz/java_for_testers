@@ -12,12 +12,12 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreationTests() {
     List<ContactData> before = app.getContactHelper().getContactList();
 
-    app.getContactHelper().createContact(createContact);
+    app.getContactHelper().createContact(app.getContactHelper().createContact);
 
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1);
 
-    before.add(createContact);
+    before.add(app.getContactHelper().createContact);
     Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
     before.sort(byId);
     after.sort(byId);

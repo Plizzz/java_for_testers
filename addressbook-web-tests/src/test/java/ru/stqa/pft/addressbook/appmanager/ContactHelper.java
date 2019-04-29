@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
+    public ContactData createContact = new ContactData("Michael", "Webber", "89862551445", "webberM@google.com", "test1");
     ContactHelper(WebDriver wd) {
         super(wd);
     }
