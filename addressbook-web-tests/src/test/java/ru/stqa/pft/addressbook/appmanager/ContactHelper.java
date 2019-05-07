@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
-    public ContactData createContact = new ContactData("Michael", "Webber", "89862551445", "webberM@google.com", "test1");
     ContactHelper(WebDriver wd) {
         super(wd);
     }
@@ -20,7 +19,7 @@ public class ContactHelper extends HelperBase {
         click(By.name("submit"));
     }
 
-    public void fillContactForm(ContactData contactData, boolean creation) {
+    private void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getLastname());
         type(By.name("home"), contactData.getHomenumber());
@@ -37,20 +36,20 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("add new"));
     }
 
-    public void selectContact(int index) {
+    private void selectContact(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
-    public void deleteSelectedContact() {
+    private void deleteSelectedContact() {
         click(By.cssSelector("[value='Delete']"));
         wd.switchTo().alert().accept();
     }
 
-    public void initContactModification(int index) {
+    private void initContactModification(int index) {
         wd.findElements(By.cssSelector("[alt='Edit']")).get(index).click();
     }
 
-    public void submitContactModification() {
+    private void submitContactModification() {
         click(By.name("update"));
     }
 
@@ -58,11 +57,9 @@ public class ContactHelper extends HelperBase {
         initContactCreation();
         fillContactForm(contact, true);
         submitContactForm();
-        NavigationHelper navigationHelper = new NavigationHelper(wd);
-        navigationHelper.gotoHomePage();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<>();
         List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
 
@@ -77,5 +74,16 @@ public class ContactHelper extends HelperBase {
         }
 
         return contacts;
+    }
+
+    public void delete(List<ContactData> before) {
+        selectContact(before.size() - 1);
+        deleteSelectedContact();
+    }
+
+    public void modify(List<ContactData> contacts, ContactData modifyContact) {
+        initContactModification(contacts.size() - 1);
+        fillContactForm(modifyContact, false);
+        submitContactModification();
     }
 }
