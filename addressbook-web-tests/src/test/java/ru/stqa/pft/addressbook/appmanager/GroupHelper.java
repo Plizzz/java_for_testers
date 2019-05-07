@@ -22,7 +22,7 @@ public class GroupHelper extends HelperBase {
         click(By.name("submit"));
     }
 
-    public void fillGroupForm(GroupData groupData) {
+    private void fillGroupForm(GroupData groupData) {
         type(By.name("group_name"), groupData.getName());
         type(By.name("group_header"), groupData.getHeader());
         type(By.name("group_footer"), groupData.getFooter());
@@ -40,11 +40,11 @@ public class GroupHelper extends HelperBase {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
-    public void initGroupModification() {
+    private void initGroupModification() {
         click(By.name("edit"));
     }
 
-    public void submitGroupModification() {
+    private void submitGroupModification() {
         click(By.name("update"));
     }
 
@@ -52,6 +52,14 @@ public class GroupHelper extends HelperBase {
         initGroupCreation();
         fillGroupForm(group);
         submitGroupCreation();
+        returnToGroupPage();
+    }
+
+    public void modifyGroup(int index, GroupData group) {
+        selectGroup(index);
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
         returnToGroupPage();
     }
 
