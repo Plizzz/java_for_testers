@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -36,8 +36,8 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("add new"));
     }
 
-    private void selectContact(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
+    private void selectContact(int id) {
+        wd.findElement(By.id(Integer.toString(id))).click();
     }
 
     private void deleteSelectedContact() {
@@ -59,30 +59,34 @@ public class ContactHelper extends HelperBase {
         submitContactForm();
     }
 
-    public List<ContactData> list() {
-        List<ContactData> contacts = new ArrayList<>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector("[name='entry']"));
 
         for (WebElement element :
                 elements) {
             String name = element.findElement(By.cssSelector("td:nth-of-type(3)")).getText();
             String lastname = element.findElement(By.cssSelector("td:nth-of-type(2)")).getText();
+            String phoneNumber = element.findElement(By.cssSelector("td:nth-of-type(6)")).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
 
-            ContactData contact = new ContactData(id, name, lastname);
-            contacts.add(contact);
+            contacts.add(new ContactData()
+                    .withId(id)
+                    .withFirstname(name)
+                    .withLastname(lastname)
+                    .withHomenumber(phoneNumber));
         }
 
         return contacts;
     }
 
-    public void delete(List<ContactData> before) {
-        selectContact(before.size() - 1);
+    public void delete(ContactData contact) {
+        selectContact(contact.getId());
         deleteSelectedContact();
     }
 
-    public void modify(List<ContactData> contacts, ContactData modifyContact) {
-        initContactModification(contacts.size() - 1);
+    public void modify(ContactData modifyContact) {
+        initContactModification(modifyContact.getId());
         fillContactForm(modifyContact, false);
         submitContactModification();
     }
