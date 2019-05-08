@@ -16,6 +16,7 @@ public class ContactDeletionTests extends TestBase {
             app.goTo().homePage();
         }
     }
+
     @Test
     public void testContactDeletion() {
         List<ContactData> before = app.contact().list();
