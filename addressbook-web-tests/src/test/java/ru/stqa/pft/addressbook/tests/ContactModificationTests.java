@@ -1,6 +1,5 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -32,8 +31,8 @@ public class ContactModificationTests extends TestBase {
 
         ContactData contact = new ContactData()
                 .withId(modifiedContact.getId())
-                .withFirstname("Robert")
-                .withLastname("Towards")
+                .withFirstname("Michael")
+                .withLastname("James")
                 .withHomenumber("89862551445")
                 .withEmail("webberM@google.com");
 
@@ -42,8 +41,6 @@ public class ContactModificationTests extends TestBase {
 
         Contacts after = app.contact().all();
         assertThat(after.size(), equalTo(before.size()));
-
-        Assert.assertEquals(before, after);
         assertThat(after, equalTo(before.withModify(modifiedContact, contact)));
     }
 }

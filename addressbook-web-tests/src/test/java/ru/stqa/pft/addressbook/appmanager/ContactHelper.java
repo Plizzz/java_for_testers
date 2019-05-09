@@ -45,8 +45,8 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    private void initContactModification(int index) {
-        wd.findElements(By.cssSelector("[alt='Edit']")).get(index).click();
+    private void initContactModification(int id) {
+        wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
     }
 
     private void submitContactModification() {
