@@ -15,7 +15,7 @@ public class ContactDeletionTests extends TestBase {
             ContactData newContact = new ContactData()
                     .withFirstname("Michael")
                     .withLastname("Webber")
-                    .withHomenumber("89862551445")
+                    .withHomePhone("89862551445")
                     .withEmail("webberM@google.com")
                     .withGroup("test1");
 

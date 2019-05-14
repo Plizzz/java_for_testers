@@ -19,7 +19,7 @@ public class ContactCreationTests extends TestBase {
         ContactData newContact = new ContactData()
                 .withFirstname("Michael")
                 .withLastname("Webber")
-                .withHomenumber(Long.toString(randomNumber))
+                .withHomePhone(Long.toString(randomNumber))
                 .withEmail("webberM@google.com")
                 .withGroup("test1");
 
