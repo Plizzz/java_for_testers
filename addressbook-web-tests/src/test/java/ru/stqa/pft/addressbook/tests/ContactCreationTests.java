@@ -20,8 +20,16 @@ public class ContactCreationTests extends TestBase {
                 .withFirstname("Michael")
                 .withLastname("Webber")
                 .withHomePhone(Long.toString(randomNumber))
-                .withEmail("webberM@google.com")
-                .withGroup("test1");
+                .withMobilePhone("+7(917)952-15-65")
+                .withWorkPhone("8 495 533 12 21")
+                .withEmail("webber.M@google.com")
+                .withEmail2("Mi-Web@yahoo.com")
+                .withEmail3("Webber@yandex.ru")
+                .withGroup("test1")
+                .withAddress("438 DARK SPURT\n" +
+                        "SAN FRANCISCO\n" +
+                        "CA 94528\n" +
+                        "USA");
 
         app.contact().createContact(newContact);
         app.goTo().homePage();
