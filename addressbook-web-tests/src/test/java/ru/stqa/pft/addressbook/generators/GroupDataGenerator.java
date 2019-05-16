@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.io.File;
@@ -17,6 +18,8 @@ public class GroupDataGenerator {
     private int count;
     @Parameter(names = "-f", description = "Target file")
     private String file;
+    @Parameter(names = "-d", description = "Data format")
+    private String format;
 
     public static void main(String[] args) throws IOException {
         GroupDataGenerator generator = new GroupDataGenerator();
@@ -32,10 +35,25 @@ public class GroupDataGenerator {
 
     private void run() throws IOException {
         List<GroupData> groups = generateGroups(count);
-        save(groups, new File(file));
+        if (format.equals("csv")) {
+            saveAsCsv(groups, new File(file));
+        } else if (format.equals("xml")) {
+            saveAsXml(groups, new File(file));
+        } else {
+            System.out.println("Unrecognized format " + format);
+        }
     }
 
-    private void save(List<GroupData> groups, File file) throws IOException {
+    private void saveAsXml(List<GroupData> groups, File file) throws IOException {
+        XStream xStream = new XStream();
+        xStream.processAnnotations(GroupData.class);
+        String xml = xStream.toXML(groups);
+        Writer writer = new FileWriter(file);
+        writer.write(xml);
+        writer.close();
+    }
+
+    private void saveAsCsv(List<GroupData> groups, File file) throws IOException {
         Writer writer = new FileWriter(file);
         for (GroupData group : groups) {
             writer.write(String.format("%s;%s;%s\n", group.getName(), group.getFooter(), group.getFooter()));
