@@ -53,29 +53,29 @@ public class ContactDataGenerator {
     }
 
     private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
-        Writer writer = new FileWriter(file);
-        for (ContactData contact : contacts) {
-            writer.write(String.format("%s, %s, %s, %s\n", contact.getFirstname(),
-                    contact.getLastname(), contact.getMobilePhone(), contact.getEmail()));
+        try (Writer writer = new FileWriter(file)) {
+            for (ContactData contact : contacts) {
+                writer.write(String.format("%s, %s, %s, %s\n", contact.getFirstname(),
+                        contact.getLastname(), contact.getMobilePhone(), contact.getEmail()));
+            }
         }
-        writer.close();
     }
 
     private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(contacts);
-        Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(json);
+        }
     }
 
     private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
         XStream xStream = new XStream();
         xStream.processAnnotations(ContactData.class);
         String xml = xStream.toXML(contacts);
-        Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(xml);
+        }
     }
 
     private List<ContactData> generateContacts(int count) {
@@ -87,7 +87,7 @@ public class ContactDataGenerator {
             contacts.add(new ContactData()
                     .withFirstname("Henrik")
                     .withLastname(Integer.toString(i))
-                    .withMobilePhone(String.format("+%s",Long.toString(randomNumber)))
+                    .withMobilePhone(String.format("+%s", Long.toString(randomNumber)))
                     .withEmail(String.format("Henrik_%s@google.com", i))
             );
         }

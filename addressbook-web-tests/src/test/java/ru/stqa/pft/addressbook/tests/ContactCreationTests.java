@@ -22,34 +22,37 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactCreationTests extends TestBase {
     @DataProvider
     public Iterator<Object[]> validContactsFromXml() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
-        StringBuilder xml = new StringBuilder();
-        String line = reader.readLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
+            StringBuilder xml = new StringBuilder();
+            String line = reader.readLine();
 
-        while (line != null) {
-            xml.append(line);
-            line = reader.readLine();
+            while (line != null) {
+                xml.append(line);
+                line = reader.readLine();
+            }
+            XStream xStream = new XStream();
+            xStream.processAnnotations(ContactData.class);
+            List<ContactData> contacts = (List<ContactData>) xStream.fromXML(String.valueOf(xml));
+            return contacts.stream().map(g -> new Object[]{g}).collect(Collectors.toList()).iterator();
         }
-        XStream xStream = new XStream();
-        xStream.processAnnotations(ContactData.class);
-        List<ContactData> contacts = (List<ContactData>) xStream.fromXML(String.valueOf(xml));
-        return contacts.stream().map(g -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
     @DataProvider
     public Iterator<Object[]> validContactsFromJson() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")));
-        StringBuilder json = new StringBuilder();
-        String line = reader.readLine();
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")))) {
+            StringBuilder json = new StringBuilder();
+            String line = reader.readLine();
 
-        while (line != null) {
-            json.append(line);
-            line = reader.readLine();
+            while (line != null) {
+                json.append(line);
+                line = reader.readLine();
+            }
+            Gson gson = new Gson();
+
+            List<ContactData> contacts = gson.fromJson(String.valueOf(json), new TypeToken<List<ContactData>>() {
+            }.getType());
+            return contacts.stream().map(g -> new Object[]{g}).collect(Collectors.toList()).iterator();
         }
-        Gson gson = new Gson();
-
-        List<ContactData> contacts = gson.fromJson(String.valueOf(json), new TypeToken<List<ContactData>>(){}.getType());
-        return contacts.stream().map(g -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
     @Test(dataProvider = "validContactsFromJson")
