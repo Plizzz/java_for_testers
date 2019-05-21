@@ -89,6 +89,7 @@ public class ContactDataGenerator {
                     .withLastname(Integer.toString(i))
                     .withMobilePhone(String.format("+%s", Long.toString(randomNumber)))
                     .withEmail(String.format("Henrik_%s@google.com", i))
+                    .withPhoto(new File("src/test/resources/ninja.png"))
             );
         }
         return contacts;

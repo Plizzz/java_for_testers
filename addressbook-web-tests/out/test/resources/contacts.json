@@ -2,19 +2,22 @@
   {
     "firstname": "Henrik",
     "lastname": "0",
-    "mobilePhone": "+61684617276",
-    "email": "Henrik_0@google.com"
+    "mobilePhone": "+87768577408",
+    "email": "Henrik_0@google.com",
+    "photo": "src/test/resources/ninja.png"
   },
   {
     "firstname": "Henrik",
     "lastname": "1",
-    "mobilePhone": "+30089792640",
-    "email": "Henrik_1@google.com"
+    "mobilePhone": "+90696219189",
+    "email": "Henrik_1@google.com",
+    "photo": "src/test/resources/ninja.png"
   },
   {
     "firstname": "Henrik",
     "lastname": "2",
-    "mobilePhone": "+70696878497",
-    "email": "Henrik_2@google.com"
+    "mobilePhone": "+91999710622",
+    "email": "Henrik_2@google.com",
+    "photo": "src/test/resources/ninja.png"
   }
 ]
