@@ -6,7 +6,9 @@ import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
+import ru.stqa.pft.addressbook.appmanager.DbHelper;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -81,6 +83,8 @@ public class ContactDataGenerator {
     private List<ContactData> generateContacts(int count) {
         List<ContactData> contacts = new ArrayList<>();
         for (int i = 0; i < count; i++) {
+            Groups groups = new DbHelper().groups();
+
             long leftLimit = 10000000001L;
             long rightLimit = 99999999999L;
             long randomNumber = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
@@ -90,6 +94,7 @@ public class ContactDataGenerator {
                     .withMobilePhone(String.format("+%s", Long.toString(randomNumber)))
                     .withEmail(String.format("Henrik_%s@google.com", i))
                     .withPhoto(new File("src/test/resources/ninja.png"))
+                    .inGroup(groups.iterator().next())
             );
         }
         return contacts;

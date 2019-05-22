@@ -15,7 +15,7 @@ import java.util.List;
 public class DbHelper {
     private final SessionFactory sessionFactory;
 
-    DbHelper() {
+    public DbHelper() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure()
                 .build();

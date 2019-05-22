@@ -1,6 +1,6 @@
 <configuration>
 
-    <timestamp key="bySecond" datePattern="yyyMMdd'T'HHmmss" />
+    <timestamp key="bySecond" datePattern="yyyMMdd'T'HHmmss"/>
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>test-${bySecond}.log</file>
@@ -20,7 +20,7 @@
     </appender>
 
     <root level="debug">
-        <appender-ref ref="FILE" />
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

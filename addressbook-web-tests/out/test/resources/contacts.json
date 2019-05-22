@@ -2,22 +2,43 @@
   {
     "firstname": "Henrik",
     "lastname": "0",
-    "mobilePhone": "+87768577408",
+    "mobilePhone": "+90404074178",
     "email": "Henrik_0@google.com",
-    "photo": "src/test/resources/ninja.png"
+    "photo": "src/test/resources/ninja.png",
+    "groups": [
+      {
+        "name": "test1",
+        "header": "header1",
+        "footer": "footer1"
+      }
+    ]
   },
   {
     "firstname": "Henrik",
     "lastname": "1",
-    "mobilePhone": "+90696219189",
+    "mobilePhone": "+78612183596",
     "email": "Henrik_1@google.com",
-    "photo": "src/test/resources/ninja.png"
+    "photo": "src/test/resources/ninja.png",
+    "groups": [
+      {
+        "name": "test1",
+        "header": "header1",
+        "footer": "footer1"
+      }
+    ]
   },
   {
     "firstname": "Henrik",
     "lastname": "2",
-    "mobilePhone": "+91999710622",
+    "mobilePhone": "+35715978119",
     "email": "Henrik_2@google.com",
-    "photo": "src/test/resources/ninja.png"
+    "photo": "src/test/resources/ninja.png",
+    "groups": [
+      {
+        "name": "test1",
+        "header": "header1",
+        "footer": "footer1"
+      }
+    ]
   }
 ]
