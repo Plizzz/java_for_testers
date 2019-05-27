@@ -10,8 +10,8 @@ import ru.stqa.pft.addressbook.model.Groups;
 import java.io.File;
 import java.util.stream.Collectors;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactToGroupTests extends TestBase {
     @BeforeMethod
@@ -65,6 +65,30 @@ public class ContactToGroupTests extends TestBase {
 
     @Test
     public void testRemoveContactFromGroup() {
+        Groups groups = app.db().groups();
+        Contacts contacts = app.db().contacts().stream().filter(c -> c.getGroups().size() > 0).collect(Collectors.toCollection(Contacts::new));
+        if (contacts.size() == 0) {
+            ContactData newContact = new ContactData()
+                    .withFirstname("Michael")
+                    .withLastname("Webber")
+                    .withMobilePhone("89862551445")
+                    .withEmail("webberM@google.com")
+                    .inGroup(groups.iterator().next())
+                    .withPhoto(new File("src/test/resources/ninja.png"));
 
+            app.contact().createContact(newContact);
+            app.goTo().homePage();
+            contacts = new Contacts().withAdded(newContact);
+        }
+        ContactData contact = contacts.iterator().next();
+
+        app.goTo().homePage();
+
+        app.contact().removeGroupFrom(contact);
+        app.goTo().homePage();
+
+        ContactData contactWithoutGroup = app.db().contacts().stream().filter(c -> c.getId() == contact.getId()).collect(Collectors.toList()).iterator().next();
+
+        assertThat(contactWithoutGroup.getGroups(), equalTo(contact.getGroups().without(contact.getGroups().iterator().next())));
     }
 }

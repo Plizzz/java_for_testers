@@ -139,4 +139,11 @@ public class ContactHelper extends HelperBase {
                 .withEmail2(email2)
                 .withEmail3(email3);
     }
+
+    public void removeGroupFrom(ContactData contactData) {
+        click(By.xpath(String.format("//a[@href='view.php?id=%s']/img[@alt='Details']", contactData.getId())));
+        click(By.linkText(contactData.getGroups().iterator().next().getName()));
+        click(By.id(String.valueOf(contactData.getId())));
+        click(By.cssSelector("[name='remove']"));
+    }
 }
