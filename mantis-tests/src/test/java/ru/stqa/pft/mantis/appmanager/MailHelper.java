@@ -44,6 +44,7 @@ public class MailHelper extends HelperBase {
     }
 
     public void start() {
+        wiser.setPort(1025);
         wiser.start();
     }
 
