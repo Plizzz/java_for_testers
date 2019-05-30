@@ -19,6 +19,7 @@ public class ApplicationManager {
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
     private MailHelper mail;
+    private JamesHelper apacheJames;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -60,6 +61,12 @@ public class ApplicationManager {
         if (mail == null)
             mail = new MailHelper(this);
         return mail;
+    }
+
+    public JamesHelper apacheJames() {
+        if (apacheJames == null)
+            apacheJames = new JamesHelper(this);
+        return apacheJames;
     }
 
     WebDriver getDriver() {
