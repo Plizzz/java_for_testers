@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 public class JamesHelper extends HelperBase {
@@ -16,7 +17,10 @@ public class JamesHelper extends HelperBase {
     JamesHelper(ApplicationManager app) {
         super(app);
         telnet = new TelnetClient();
-        mailSession = Session.getDefaultInstance(System.getProperties());
+        Properties props = new Properties();
+        props.put("mail.pop3.port", "9110");
+        mailSession = Session.getDefaultInstance(props);
+//        mailSession = Session.getDefaultInstance(System.getProperties());
     }
 
     private TelnetClient telnet;
@@ -89,7 +93,7 @@ public class JamesHelper extends HelperBase {
             StringBuilder sb = new StringBuilder();
             char ch = (char) in.read();
             while (true) {
-                System.out.println(ch);
+                System.out.print(ch);
                 sb.append(ch);
                 if (ch == lastChar) {
                     if (sb.toString().endsWith(pattern)) {
