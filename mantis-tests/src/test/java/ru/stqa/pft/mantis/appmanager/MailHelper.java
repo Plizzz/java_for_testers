@@ -18,7 +18,7 @@ public class MailHelper extends HelperBase {
         wiser = new Wiser();
     }
 
-    public List<MailMessage> waitForMail(int count, long timeout) throws MessagingException, IOException {
+    public List<MailMessage> waitForMail(int count, long timeout) {
         long start = System.currentTimeMillis();
         while (System.currentTimeMillis() < start + timeout) {
             if (wiser.getMessages().size() >= count) {

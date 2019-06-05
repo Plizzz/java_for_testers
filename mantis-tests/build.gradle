@@ -21,6 +21,10 @@ dependencies {
     testCompile group: 'org.subethamail', name: 'subethasmtp', version: '3.1.7'
     // https://mvnrepository.com/artifact/ru.lanwen.verbalregex/java-verbal-expressions
     compile group: 'ru.lanwen.verbalregex', name: 'java-verbal-expressions', version: '1.6'
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.2.Final'
 }
 
 test {

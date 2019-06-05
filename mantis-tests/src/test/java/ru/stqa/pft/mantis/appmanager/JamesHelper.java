@@ -20,7 +20,6 @@ public class JamesHelper extends HelperBase {
         Properties props = new Properties();
         props.put("mail.pop3.port", "9110");
         mailSession = Session.getDefaultInstance(props);
-//        mailSession = Session.getDefaultInstance(System.getProperties());
     }
 
     private TelnetClient telnet;
@@ -53,7 +52,7 @@ public class JamesHelper extends HelperBase {
         closeTelnetSession();
     }
 
-    private void initTelnetSession() {
+    public void initTelnetSession() {
         mailserver = app.getProperty("mailserver.host");
         int port = Integer.parseInt(app.getProperty("mailserver.port"));
         String login = app.getProperty("mailserver.adminlogin");
@@ -137,6 +136,9 @@ public class JamesHelper extends HelperBase {
 
     private Folder openInbox(String username, String password) throws MessagingException {
         store = mailSession.getStore("pop3");
+        if (mailserver == null)
+            mailserver = app.getProperty("mailserver.host");
+
         store.connect(mailserver, username, password);
 
         Folder folder = store.getDefaultFolder().getFolder("INBOX");

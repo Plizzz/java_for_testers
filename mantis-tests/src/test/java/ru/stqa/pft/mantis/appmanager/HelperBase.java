@@ -53,4 +53,12 @@ public class HelperBase {
             return false;
         }
     }
+
+    public void login(String username, String password) {
+        wd.get(app.getProperty("web.baseUrl") + "/login.php");
+        type(By.id("username"), username);
+        click(By.cssSelector("[value='Login']"));
+        type(By.id("password"), password);
+        click(By.cssSelector("[value='Login']"));
+    }
 }

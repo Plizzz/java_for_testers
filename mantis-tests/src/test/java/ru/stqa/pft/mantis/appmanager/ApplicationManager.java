@@ -20,6 +20,7 @@ public class ApplicationManager {
     private FtpHelper ftp;
     private MailHelper mail;
     private JamesHelper apacheJames;
+    private DbHelper dbHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -40,7 +41,7 @@ public class ApplicationManager {
         return new HttpSession(this);
     }
 
-    String getProperty(String key) {
+    public String getProperty(String key) {
         return properties.getProperty(key);
     }
 
@@ -69,6 +70,12 @@ public class ApplicationManager {
         return apacheJames;
     }
 
+    public DbHelper db() {
+        if (dbHelper == null)
+            dbHelper = new DbHelper();
+        return dbHelper;
+    }
+
     WebDriver getDriver() {
         if (wd == null) {
             switch (browser) {
@@ -83,6 +90,7 @@ public class ApplicationManager {
                     break;
             }
             wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+            wd.manage().window().maximize();
             wd.get(properties.getProperty("web.baseUrl"));
         }
         return wd;
