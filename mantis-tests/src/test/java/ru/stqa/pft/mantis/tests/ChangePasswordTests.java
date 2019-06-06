@@ -21,17 +21,19 @@ public class ChangePasswordTests extends TestBase {
 
     @Test
     public void testChangePassword() throws MessagingException, IOException {
-//        String password = "password";
+        String password = "password";
         String newPassword = "changedPassword";
 
         app.registration().login(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"));
         Users users = app.db().users();
         UserData user = users.iterator().next();
 
+        app.apacheJames().drainEmail(user.getUsername(), password);
+
         app.registration().resetPassword(user);
 
-        List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
-//        List<MailMessage> mailMessages = app.apacheJames().waitForMail(user.getUsername(), password, 6000);
+//        List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
+        List<MailMessage> mailMessages = app.apacheJames().waitForMail(user.getUsername(), password, 60000);
         String confirmationLink = app.registration().findConfirmationLink(mailMessages, user.getEmail());
         app.registration().changePassword(confirmationLink, newPassword);
 
