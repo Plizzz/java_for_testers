@@ -13,4 +13,6 @@ dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.8'
     // https://mvnrepository.com/artifact/org.apache.httpcomponents/fluent-hc
     compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: '4.5.8'
+    // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '4.0.0'
 }
