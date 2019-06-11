@@ -53,7 +53,7 @@ public class ApplicationManager {
         } else {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);
-            capabilities.setPlatform(Platform.fromString(properties.getProperty("platform", "linux")));
+            capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "linux")));
             wd = new RemoteWebDriver(new URL(properties.getProperty("selenuim.server")), capabilities);
         }
         wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
